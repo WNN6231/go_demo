@@ -40,3 +40,5 @@ func GetExchangeRates(ctx *gin.Context) {
 	}
 	ctx.JSON(http.StatusOK, exchangeRates)
 }
+
+
