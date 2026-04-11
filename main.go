@@ -2,17 +2,18 @@ package main
 
 import (
 	"exchangeapp/config"
-
-	"github.com/gin-gonic/gin"
+	"exchangeapp/router"
 )
 
 func main() {
 	config.InitConfig()
-	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
-	r.Run(":" + config.AppConfig.App.Port)
+
+	r := router.SetupRouter()
+	port := config.AppConfig.App.Port
+
+	if port == "" {
+		port = ":8080"
+	}
+
+	r.Run(port)
 }
